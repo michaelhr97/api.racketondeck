@@ -5,4 +5,7 @@ env:
 extends: eslint:recommended
 parserOptions:
   ecmaVersion: latest
-rules: {}
+rules:
+  max-len:
+    - error
+    - 120
