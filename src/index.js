@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   openApiValidator.middleware({
     apiSpec: path.join(__dirname, 'openapi', 'api.yml'),
+    operationHandlers: path.join(__dirname, 'controllers'),
   })
 );
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiDoc));

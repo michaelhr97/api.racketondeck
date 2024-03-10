@@ -3,10 +3,39 @@ info:
   title: API Title
   version: '1.0'
 servers:
-  - url: https://api.server.test/v1
+  - url: http://localhost:3610/v1
 paths:
-  /test:
-    get:
+  /auth/register:
+    post:
+      tags:
+        - auth
+      summary: Register a new user
+      description: |
+        This endpoint allows users to register in the system by providing an email and password.
+        Clients are expected to send a POST request with a JSON body containing the credentials of the new user.
+        Upon successful registration, the user will be able to access additional functionalities of the system.
+      x-eov-operation-handler: authController
+      operationId: register
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: My personal account
+                email:
+                  type: string
+                  example: test@myaccount.com
+                password:
+                  type: string
+                  example: MyPassword
+              required:
+                - email
+                - password
+              additionalProperties: false
       responses:
-        '200':
+        200:
           description: OK

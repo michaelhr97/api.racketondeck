@@ -30,6 +30,26 @@ const config = convict({
       env: 'EXPIRESIN',
     },
   },
+  sequelize: {
+    database: {
+      doc: 'The name of the database',
+      format: '*',
+      default: 'racketondeck',
+      env: 'SEQUELIZE_DATABASE',
+    },
+    username: {
+      doc: 'The username of the database',
+      format: '*',
+      default: 'racketondeck',
+      env: 'SEQUELIZE_USERNAME',
+    },
+    password: {
+      doc: 'The password of the database',
+      format: '*',
+      default: 'racketondeck',
+      env: 'SEQUELIZE_PASSWORD',
+    },
+  },
 });
 
 config.validate({ allowed: 'strict' });
