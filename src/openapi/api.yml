@@ -75,3 +75,43 @@ paths:
       responses:
         200:
           description: OK
+  /application:
+    post:
+      tags:
+        - application
+      summary: Create a new application
+      description: |
+        This endpoint allows you to create a new application. You need to provide the ID of the account associated with the application, the name of the application, an optional description, the URL or path to the application's logo, and whether the application is enabled or not.
+      x-eov-operation-handler: applicationController
+      operationId: create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accountId:
+                  type: string
+                  description: The ID of the account associated with the application.
+                name:
+                  type: string
+                  description: The name of the application.
+                description:
+                  type: string
+                  description: The description of the application.
+                logo:
+                  type: string
+                  description: The URL or path to the logo of the application.
+                enabled:
+                  type: boolean
+                  description: Indicates whether the application is enabled or not.
+                  default: true
+              required:
+                - accountId
+                - name
+                - enabled
+              additionalProperties: false
+      responses:
+        200:
+          description: OK
