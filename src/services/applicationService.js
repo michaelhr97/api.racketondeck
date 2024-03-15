@@ -21,6 +21,17 @@ class applicationService {
   static async findById(id) {
     return application.findOne({ where: { id }, raw: true });
   }
+
+  /**
+   * Updates an existing application.
+   * @param {string} id - The ID of the application to update.
+   * @param {object} data - The updated data for the application.
+   * @returns {Promise<Object>} A promise that resolves with the updated application.
+   */
+  static async update(id, data) {
+    const updatedApplication = await application.update(data, { where: { id }, raw: true, returning: true });
+    return updatedApplication[1][0];
+  }
 }
 
 module.exports = applicationService;

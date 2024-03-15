@@ -4,5 +4,6 @@ module.exports = {
   CREDENTIALS_NOT_CORRECT: 'The password is not correct',
 
   ACCOUNT_NOT_FOUND: 'The account is not exist',
+  APPLICATION_NOT_FOUND: 'The application is not exist',
   USER_NOT_FOUND: 'The user is not exist',
 };

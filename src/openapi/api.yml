@@ -121,7 +121,7 @@ paths:
         - application
       summary: Retrieve an application by ID
       description: |
-        Retrieves information about a specific application using its unique identifier (ID). This endpoint allows you to retrieve details such as the application's name, description, logo URL or path, and its current enabled status.
+        Retrieves information about a specific application using its identifier.
       x-eov-operation-handler: applicationController
       operationId: findById
       parameters:
@@ -131,6 +131,45 @@ paths:
             type: string
             description: The ID of the application to find.
           required: true
+      responses:
+        200:
+          description: OK
+    put:
+      tags:
+        - application
+      summary: Update an existing application
+      description: |
+        Update an existing application by providing its identifier.
+      x-eov-operation-handler: applicationController
+      operationId: update
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+            description: The ID of the application to update.
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the application.
+                description:
+                  type: string
+                  description: The description of the application.
+                logo:
+                  type: string
+                  description: The URL or path to the logo of the application.
+                enabled:
+                  type: boolean
+                  description: Indicates whether the application is enabled or not.
+                  default: true
+              additionalProperties: false
       responses:
         200:
           description: OK

@@ -36,11 +36,30 @@ class applicationController {
 
     const application = await applicationService.findById(id);
     if (!application) {
-      responseHelper.notFound(res, errorMessages.ACCOUNT_NOT_FOUND, errorCodes.NOT_FOUND);
+      responseHelper.notFound(res, errorMessages.APPLICATION_NOT_FOUND, errorCodes.NOT_FOUND);
       return;
     }
 
     responseHelper.ok(res, application);
+  }
+
+  /**
+   * Handler for PUT /application/{id}
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   */
+  static async update(req, res) {
+    const id = req.params.id;
+    const payload = req.body;
+
+    const application = await applicationService.findById(id);
+    if (!application) {
+      responseHelper.notFound(res, errorMessages.APPLICATION_NOT_FOUND, errorCodes.NOT_FOUND);
+      return;
+    }
+
+    const data = await applicationService.update(id, payload);
+    responseHelper.ok(res, data);
   }
 }
 
