@@ -37,6 +37,37 @@ class authController {
 
     responseHelper.created(res, data);
   }
+
+  /**
+   * Handler for POST /auth/login
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   */
+  static async loginWithEmailAndPassword(req, res) {
+    const payload = req.body;
+
+    if (!isemail.validate(payload.email)) {
+      responseHelper.badRequest(res, errorMessages.EMAIL_FORMAT_INVALID, errorCodes.BAD_REQUEST);
+      return;
+    }
+
+    const user = await userService.findByEmail(payload.email);
+    if (!user) {
+      responseHelper.notFound(res, errorMessages.USER_NOT_FOUND, errorCodes.NOT_FOUND);
+      return;
+    }
+
+    const areCredentialsCorrect = await cryptoHelper.comparePasswords(payload.password, user.password);
+    if (!areCredentialsCorrect) {
+      responseHelper.badRequest(res, errorMessages.CREDENTIALS_NOT_CORRECT, errorCodes.BAD_REQUEST);
+      return;
+    }
+
+    let data = _.omit(user, 'password');
+    data = await cryptoHelper.sign(data);
+
+    responseHelper.ok(res, data);
+  }
 }
 
 module.exports = authController;

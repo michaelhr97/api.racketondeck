@@ -25,12 +25,48 @@ paths:
               properties:
                 name:
                   type: string
+                  description: The name associated with the account.
                   example: My personal account
                 email:
                   type: string
+                  description: The email address associated with the account.
                   example: test@myaccount.com
                 password:
                   type: string
+                  description: The password for the account.
+                  example: MyPassword
+              required:
+                - email
+                - password
+              additionalProperties: false
+      responses:
+        200:
+          description: OK
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: Log in with email and password
+      description: |
+        This endpoint allows users to log in to the system using their registered email and password.
+        Clients are expected to send a POST request with a JSON body containing the user's credentials.
+        Upon successful authentication, the endpoint returns a JWT (JSON Web Token) which can be used for accessing authorized functionalities.
+      x-eov-operation-handler: authController
+      operationId: loginWithEmailAndPassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: The email address associated with the account.
+                  example: test@myaccount.com
+                password:
+                  type: string
+                  description: The password for the account.
                   example: MyPassword
               required:
                 - email
