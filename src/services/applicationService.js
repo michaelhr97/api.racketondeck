@@ -32,6 +32,14 @@ class applicationService {
     const updatedApplication = await application.update(data, { where: { id }, raw: true, returning: true });
     return updatedApplication[1][0];
   }
+
+  /**
+   * Deletes an application by id.
+   * @param {string} id - The id of the application to delete.
+   */
+  static async delete(id) {
+    await application.destroy({ where: { id } });
+  }
 }
 
 module.exports = applicationService;

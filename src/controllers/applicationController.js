@@ -61,6 +61,24 @@ class applicationController {
     const data = await applicationService.update(id, payload);
     responseHelper.ok(res, data);
   }
+
+  /**
+   * Handler for DELETE /application/{id}
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   */
+  static async delete(req, res) {
+    const id = req.params.id;
+
+    const application = await applicationService.findById(id);
+    if (!application) {
+      responseHelper.notFound(res, errorMessages.APPLICATION_NOT_FOUND, errorCodes.NOT_FOUND);
+      return;
+    }
+
+    await applicationService.delete(id);
+    responseHelper.ok(res);
+  }
 }
 
 module.exports = applicationController;

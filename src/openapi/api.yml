@@ -173,3 +173,21 @@ paths:
       responses:
         200:
           description: OK
+    delete:
+      tags:
+        - application
+      summary: Delete an existing application
+      description: |
+        Delete an existing application by providing its identifier.
+      x-eov-operation-handler: applicationController
+      operationId: delete
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+            description: The ID of the application to delete.
+          required: true
+      responses:
+        200:
+          description: OK
