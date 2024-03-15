@@ -25,6 +25,23 @@ class applicationController {
     const data = await applicationService.create(payload);
     responseHelper.created(res, data);
   }
+
+  /**
+   * Handler for GET /application/{id}
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   */
+  static async findById(req, res) {
+    const id = req.params.id;
+
+    const application = await applicationService.findById(id);
+    if (!application) {
+      responseHelper.notFound(res, errorMessages.ACCOUNT_NOT_FOUND, errorCodes.NOT_FOUND);
+      return;
+    }
+
+    responseHelper.ok(res, application);
+  }
 }
 
 module.exports = applicationController;
