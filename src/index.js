@@ -1,6 +1,7 @@
 const app = require('express')();
 
 const fs = require('fs');
+const cors = require('cors');
 const path = require('path');
 const yaml = require('js-yaml');
 const bodyParser = require('body-parser');
@@ -12,6 +13,7 @@ const logger = require('./utils/logger');
 
 const openapiDoc = yaml.load(fs.readFileSync(path.join(__dirname, 'openapi', 'api.yml')));
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
