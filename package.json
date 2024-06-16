@@ -1,0 +1,23 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "lerna": "^8.1.3",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.3.2"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "lint": "lerna run lint",
+    "lint:fix": "lerna run lint:fix",
+    "start": "lerna run start"
+  },
+  "dependencies": {
+    "husky": "^9.0.11"
+  }
+}
