@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="images/logo.png" alt="RacketOnDeck" width="500"/>
-</p>
+![RacketOnDeck](images/logo.png)
 
 # RacketOnDeck
 
