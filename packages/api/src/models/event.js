@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize';
 import dbPostgres from '../lib/dbPostgres.js';
 
-const tournament = dbPostgres.define(
-  'tournament',
+const event = dbPostgres.define(
+  'event',
   {
     id: {
       type: DataTypes.UUIDV4,
@@ -41,11 +41,6 @@ const tournament = dbPostgres.define(
       allowNull: true,
       field: 'description',
     },
-    registrationDeadline: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      field: 'registration_deadline',
-    },
     startDate: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -61,21 +56,6 @@ const tournament = dbPostgres.define(
       allowNull: false,
       field: 'location',
     },
-    maxParticipants: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      field: 'max_participants',
-    },
-    inscriptionFee: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-      field: 'inscription_fee',
-    },
-    prize: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-      field: 'prize',
-    },
     image: {
       type: DataTypes.TEXT,
       allowNull: true,
@@ -90,8 +70,8 @@ const tournament = dbPostgres.define(
   },
   {
     timestamps: true,
-    tableName: 'tournaments',
+    tableName: 'events',
   },
 );
 
-export default tournament;
+export default event;
