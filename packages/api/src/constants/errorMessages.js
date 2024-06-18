@@ -8,6 +8,7 @@ export default {
   APPLICATION_NOT_FOUND: 'The application is not found',
   COURT_NOT_FOUND: 'The court is not found',
   TOURNAMENT_NOT_FOUND: 'The tournament is not found',
+  EVENT_NOT_FOUND: 'The event is not found',
   AUTHORIZATION_NOT_PRESENT: 'Authorization header is missing. Expected format: "Bearer <token>".',
   AUTHORIZATION_NOT_VALID: 'The authorization token is not valid.',
   PERMISSION_ACCOUNT_ALREADY_EXISTS: 'The user has already the permission',

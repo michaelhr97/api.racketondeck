@@ -48,7 +48,18 @@ const findAndCountAll = async (filters) => {
   });
 };
 
+/**
+ * Finds a event by its ID.
+ *
+ * @param {string} id - The ID of the event to find.
+ * @returns {Promise<object|null>} A Promise resolving to the found event object or null if not found.
+ */
+const findById = async (id) => {
+  return event.findOne({ where: { id }, raw: true });
+};
+
 eventService.create = create;
 eventService.findAndCountAll = findAndCountAll;
+eventService.findById = findById;
 
 export default eventService;

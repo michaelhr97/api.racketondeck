@@ -44,3 +44,28 @@ export const findAndCountAll = async (req, res) => {
   const response = await eventService.findAndCountAll({ applicationId, ...filters });
   responseHelper.ok(res, response.rows, response.count);
 };
+
+/**
+ * Handler for GET /applications/{applicationId}/events/{eventId}
+ *
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ */
+export const findById = async (req, res) => {
+  const { applicationId, eventId } = req.params;
+  const requestUser = req._user;
+
+  const application = await applicationService.findById(requestUser.accountId, applicationId);
+  if (!application) {
+    responseHelper.notFound(res, errorMessages.APPLICATION_NOT_FOUND);
+    return;
+  }
+
+  const response = await eventService.findById(eventId);
+  if (!response) {
+    responseHelper.notFound(res, errorMessages.EVENT_NOT_FOUND);
+    return;
+  }
+
+  responseHelper.ok(res, response);
+};
