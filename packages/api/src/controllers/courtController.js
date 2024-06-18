@@ -4,7 +4,7 @@ import errorMessages from '../constants/errorMessages.js';
 import responseHelper from '../helpers/responseHelper.js';
 
 /**
- * Handler for POST /courts
+ * Handler for POST /applications/{applicationId}/courts
  *
  * @param {object} req - The request object.
  * @param {object} res - The response object.
@@ -25,7 +25,7 @@ export const create = async (req, res) => {
 };
 
 /**
- * Handler for GET /courts
+ * Handler for GET /applications/{applicationId}/courts
  *
  * @param {object} req - The request object.
  * @param {object} res - The response object.
@@ -46,7 +46,7 @@ export const findAndCountAll = async (req, res) => {
 };
 
 /**
- * Handler for GET /courts/{id}
+ * Handler for GET /applications/{applicationId}/courts/{courtId}
  *
  * @param {object} req - The request object.
  * @param {object} res - The response object.
@@ -71,7 +71,7 @@ export const findById = async (req, res) => {
 };
 
 /**
- * Handler for PUT /courts/{id}
+ * Handler for PUT /applications/{applicationId}/courts/{courtId}
  *
  * @param {object} req - The request object.
  * @param {object} res - The response object.
@@ -98,7 +98,7 @@ export const updateById = async (req, res) => {
 };
 
 /**
- * Handler for DELETE /courts/{id}
+ * Handler for DELETE /applications/{applicationId}/courts/{courtId}
  *
  * @param {object} req - The request object.
  * @param {object} res - The response object.

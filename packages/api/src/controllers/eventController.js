@@ -4,7 +4,7 @@ import eventService from '../services/eventService.js';
 import responseHelper from '../helpers/responseHelper.js';
 
 /**
- * Handler for POST /accounts/{accountId}/events
+ * Handler for POST /applications/{applicationId}/events
  *
  * @param {object} req - The request object.
  * @param {object} res - The response object.

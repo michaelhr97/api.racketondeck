@@ -4,7 +4,7 @@ import responseHelper from '../helpers/responseHelper.js';
 import tournamentService from '../services/tournamentService.js';
 
 /**
- * Handler for POST /tournaments
+ * Handler for POST /applications/{applicationId}/tournaments
  *
  * @param {object} req - The request object.
  * @param {object} res - The response object.
@@ -24,7 +24,7 @@ export const create = async (req, res) => {
 };
 
 /**
- * Handler for GET /tournaments
+ * Handler for GET /applications/{applicationId}/tournaments
  *
  * @param {object} req - The request object.
  * @param {object} res - The response object.
@@ -44,7 +44,7 @@ export const findAndCountAll = async (req, res) => {
 };
 
 /**
- * Handler for GET /tournaments/{id}
+ * Handler for GET /applications/{applicationId}/tournaments/{tournamentId}
  *
  * @param {object} req - The request object.
  * @param {object} res - The response object.
@@ -62,7 +62,7 @@ export const findById = async (req, res) => {
 };
 
 /**
- * Handler for PUT /tournaments/{id}
+ * Handler for PUT /applications/{applicationId}/tournaments/{tournamentId}
  *
  * @param {object} req - The request object.
  * @param {object} res - The response object.
@@ -82,7 +82,7 @@ export const updateById = async (req, res) => {
 };
 
 /**
- * Handler for DELETE /tournaments/{id}
+ * Handler for DELETE /applications/{applicationId}/tournaments/{tournamentId}
  *
  * @param {object} req - The request object.
  * @param {object} res - The response object.
