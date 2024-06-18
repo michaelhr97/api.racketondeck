@@ -23,3 +23,24 @@ export const create = async (req, res) => {
   const response = await eventService.create({ applicationId, ...payload });
   responseHelper.created(res, response);
 };
+
+/**
+ * Handler for GET /applications/{applicationId}/events
+ *
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ */
+export const findAndCountAll = async (req, res) => {
+  const { applicationId } = req.params;
+  const filters = req.query;
+  const requestUser = req._user;
+
+  const application = await applicationService.findById(requestUser.accountId, applicationId);
+  if (!application) {
+    responseHelper.notFound(res, errorMessages.APPLICATION_NOT_FOUND);
+    return;
+  }
+
+  const response = await eventService.findAndCountAll({ applicationId, ...filters });
+  responseHelper.ok(res, response.rows, response.count);
+};
