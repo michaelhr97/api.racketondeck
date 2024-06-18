@@ -1,3 +1,4 @@
+import { Parser } from 'json2csv';
 import _ from 'lodash-es';
 import cryptoHelper from '../helpers/cryptoHelper.js';
 import errorMessages from '../constants/errorMessages.js';
@@ -56,6 +57,30 @@ export const findAndCountAll = async (req, res) => {
 
   const response = await staffService.findAndCountAll({ accountId, ...filters });
   responseHelper.ok(res, response.rows, response.count);
+};
+
+/**
+ * Handler for GET /accounts/{accountId}/staff/csv
+ *
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ */
+export const findAndCountAllCsv = async (req, res) => {
+  const { accountId } = req.params;
+  const filters = req.query;
+  const requestUser = req._user;
+
+  if (!permissionHelper.canReadAccount(requestUser, accountId)) {
+    responseHelper.forbidden(res, errorMessages.AUTHORIZATION_NOT_VALID);
+    return;
+  }
+
+  const response = await staffService.findAndCountAll({ accountId, ...filters });
+  const fields = ['id', 'createdAt', 'updatedAt', 'name', 'email', 'type', 'image', 'enabled'];
+  const json2csvParser = new Parser({ fields });
+  const csv = json2csvParser.parse(response.rows);
+
+  responseHelper.csv(res, csv, 'staff.csv');
 };
 
 /**

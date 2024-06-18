@@ -142,6 +142,19 @@ const error = (res, message = ReasonPhrases.INTERNAL_SERVER_ERROR) => {
   res.status(response.statusCode).json(response);
 };
 
+/**
+ * Sends a response with a CSV file.
+ *
+ * @param {object} res - The response object.
+ * @param {string} data - The CSV data to be sent.
+ * @param {string} filename - The name of the file to be sent.
+ */
+const csv = (res, data, filename) => {
+  res.header('Content-Type', 'text/csv');
+  res.attachment(filename);
+  res.send(data);
+};
+
 responseHelper.ok = ok;
 responseHelper.created = created;
 responseHelper.badRequest = badRequest;
@@ -150,5 +163,6 @@ responseHelper.forbidden = forbidden;
 responseHelper.notFound = notFound;
 responseHelper.conflict = conflict;
 responseHelper.error = error;
+responseHelper.csv = csv;
 
 export default responseHelper;
