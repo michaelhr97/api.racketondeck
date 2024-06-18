@@ -108,6 +108,7 @@ const updateById = async (id, data) => {
 const deleteById = async (id) => {
   await tournament.destroy({ where: { id } });
 };
+
 tournamentService.create = create;
 tournamentService.findAndCountAll = findAndCountAll;
 tournamentService.findById = findById;

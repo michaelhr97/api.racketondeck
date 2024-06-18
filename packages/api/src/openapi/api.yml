@@ -3375,6 +3375,125 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerError'
+  /applications/{applicationId}/events:
+    post:
+      tags:
+        - Events 🎉
+      security:
+        - bearerAuth: []
+      summary: Create a new event
+      description: |
+        This endpoint is used to create a new event on the platform.
+        It requires providing details such as the event name, description, start date, end date, location, and other optional information.
+      x-eov-operation-handler: eventController
+      operationId: create
+      parameters:
+        - in: path
+          name: applicationId
+          schema:
+            type: string
+            description: The unique identifier for the application (UUIDv4).
+            example: '123e4567-e89b-12d3-a456-426614174000'
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the event.
+                  example: Summer Tennis Open
+                description:
+                  type: string
+                  description: A description of the event.
+                  example: Annual tennis event held during the summer.
+                startDate:
+                  type: string
+                  format: date-time
+                  description: The start date of the event.
+                  example: '2024-07-01T09:00:00Z'
+                endDate:
+                  type: string
+                  format: date-time
+                  description: The end date of the tournament.
+                  example: '2024-07-15T18:00:00Z'
+                location:
+                  type: string
+                  description: The location where the tournament will be held.
+                  example: Central Park Tennis Club
+                image:
+                  type: string
+                  description: URL or path to an image representing the tournament.
+                  nullable: true
+                enabled:
+                  type: boolean
+                  description: A flag indicating whether the tournament is enabled.
+                  example: true
+                  default: true
+              required:
+                - name
+                - startDate
+                - endDate
+                - location
+                - enabled
+              additionalProperties: false
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    description: HTTP status code indicating success.
+                    default: 201
+                  message:
+                    type: string
+                    description: Descriptive message of the success.
+                    default: Created
+                  data:
+                    $ref: '#/components/schemas/Event'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        409:
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
   /feedback/issues:
     post:
       tags:
@@ -4081,6 +4200,70 @@ components:
         - maxParticipants
         - inscriptionFee
         - prize
+        - image
+        - enabled
+      additionalProperties: false
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the event (UUIDv4).
+          example: '123e4567-e89b-12d3-a456-426614174000'
+        createdAt:
+          type: string
+          format: date-time
+          description: The time when the event was created.
+          example: '2024-05-28T12:34:56Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: The time when the event was last updated.
+          example: '2024-05-28T12:34:56Z'
+        applicationId:
+          type: string
+          description: The unique identifier for the application associated with the event (UUIDv4).
+          example: '123e4567-e89b-12d3-a456-426614174001'
+        name:
+          type: string
+          description: The name of the event.
+          example: Summer Tennis Open
+        description:
+          type: string
+          description: A description of the event.
+          example: Annual tennis tournament held during the summer.
+        startDate:
+          type: string
+          format: date-time
+          description: The start date of the tournament.
+          example: '2024-07-01T09:00:00Z'
+        endDate:
+          type: string
+          format: date-time
+          description: The end date of the tournament.
+          example: '2024-07-15T18:00:00Z'
+        location:
+          type: string
+          description: The location where the tournament will be held.
+          example: Central Park Tennis Club
+        image:
+          type: string
+          description: URL or path to an image representing the tournament.
+          nullable: true
+        enabled:
+          type: boolean
+          description: A flag indicating whether the tournament is enabled.
+          example: true
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - applicationId
+        - name
+        - description
+        - startDate
+        - endDate
+        - location
         - image
         - enabled
       additionalProperties: false
