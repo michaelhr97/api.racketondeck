@@ -4069,7 +4069,7 @@ components:
           type: boolean
           description: A flag indicating whether the account is enabled.
           example: true
-        owner:
+        user:
           type: object
           description: The owner of the account.
           properties:

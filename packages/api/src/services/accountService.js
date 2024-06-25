@@ -34,7 +34,7 @@ const createWithAssociatedOwner = async (data) => {
     let ownerData = await newOwner.get({ plain: true });
     ownerData = _.omit(ownerData, ['password', 'accountId']);
 
-    return { ...accountData, owner: ownerData };
+    return { ...accountData, user: ownerData };
   } catch (error) {
     await transaction.rollback();
     logger.error({
