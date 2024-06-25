@@ -1,4 +1,5 @@
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
+import _ from 'lodash-es';
 import errorCodes from '../constants/errorCodes.js';
 
 const responseHelper = {};
@@ -16,7 +17,7 @@ const ok = (res, data = null, count = null) => {
     message: ReasonPhrases.OK,
   };
 
-  if (count) {
+  if (!_.isNil(count)) {
     response.count = count;
   }
 
